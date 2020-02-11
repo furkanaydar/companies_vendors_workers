@@ -23,6 +23,9 @@ public class Vendor {
     @NotBlank
     private String vendorAddress;
 
+    private double vendorLat;
+    private double vendorLong;
+
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,

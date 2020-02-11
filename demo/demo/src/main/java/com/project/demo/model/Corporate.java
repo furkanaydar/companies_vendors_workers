@@ -1,5 +1,6 @@
 package com.project.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +22,8 @@ public class Corporate {
     private String corporateName;
 
     @Column(length = 128, nullable = false)
-    private String encrytedPassword;
+    @JsonIgnore
+    private String encryptedPassword;
 
     @NotBlank
     private String corporateEmail;
@@ -37,4 +39,12 @@ public class Corporate {
             inverseJoinColumns = { @JoinColumn(name = "vendor_id") })
     private Set<Automobile> corporateVendors = new HashSet<>();
 
+    public Corporate() {
+
+    }
+    public Corporate(String corporateName, String encryptedPassword, String corporateEmail) {
+        this.corporateName = corporateName;
+        this.encryptedPassword = encryptedPassword;
+        this.corporateEmail = corporateEmail;
+    }
 }

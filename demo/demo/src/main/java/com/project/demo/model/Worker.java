@@ -26,9 +26,17 @@ public class Worker {
     @NotBlank
     private String workerLastName;
 
-    @Column(length = 128, nullable = false)
-    private String encrytedPassword;
+    @NotBlank
+    private String workerUsername;
 
+    @Column(length = 128, nullable = false)
+    private String encryptedPassword;
+
+
+    @Column(length = 128, nullable = false)
+    private String phoneNumber;
+
+    private int numberOfAssignedCars;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "corporate_id", nullable = false)
@@ -37,14 +45,7 @@ public class Worker {
     private Corporate corporate;
 
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "worker_automobiles",
-            joinColumns = { @JoinColumn(name = "worker_id") },
-            inverseJoinColumns = { @JoinColumn(name = "automobile_id") })
-    private Set<Automobile> workerAutomobiles = new HashSet<>();
-
+    public Worker() {
+        this.numberOfAssignedCars = 0;
+    }
 }

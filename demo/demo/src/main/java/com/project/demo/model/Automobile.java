@@ -24,19 +24,22 @@ public class Automobile {
     @Column(unique = true)
     private String automobileLicensePlate;
 
+    @NotBlank
+    private String automobileBrand;
+
+    @NotBlank
+    private String automobileYear;
+
+    @NotBlank
+    private String automobileModel;
+
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "corporate_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Corporate corporate;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "workerAutomobiles")
-    private Set<Worker> workers = new HashSet<>();
 
 
 }
